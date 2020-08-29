@@ -6,9 +6,9 @@ const readlineInterface = readline.createInterface({
 });
 
 export function waitForInput(msg: string) {
-  return new Promise(res =>
-    readlineInterface.question(msg, name => {
-      res(name);
+  return new Promise<string>(res =>
+    readlineInterface.question(msg, key => {
+      res(key);
     }),
   );
 }
