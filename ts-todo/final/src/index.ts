@@ -27,21 +27,21 @@ async function main() {
     for (const command of commands) {
       console.log(command.toString());
     }
-    console.log('');
+    console.log();
     const key = await waitForInput(`input command: `);
     console.clear();
     const command = commands.find(item => item.key === key);
     if (command) {
       const action = await command.run(state);
       if (action) {
-        state = reducer(state, action);
+        state = getNextState(state, action);
       }
     }
   }
 }
 main();
 
-function reducer(state: AppState, action: Action): AppState {
+function getNextState(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'newTodo':
       return {
